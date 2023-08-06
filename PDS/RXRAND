@@ -1,0 +1,35 @@
+  /* ---------------- REXX ---------------- *
+  | Demonstrate various randomized options |
+  * -------------------------------------- */
+
+  /* ----------------------------------- *
+  | Getting the active Exec name to use |
+  * ----------------------------------- */
+  parse source . . exec .
+  say 'DDname based on the active exec name:'
+  say 'DDname:' exec
+
+  /* -------------------------- *
+  | Using REXX Random Function |
+  * -------------------------- */
+  say ' '
+  dd = 'DDN'random(99999)
+  say 'DDname based on a random number:'
+  say 'DDname:' dd
+
+  /* ------------------------------------------------ *
+  | Using the day of month and second since midnight |
+  * ------------------------------------------------ */
+  say ' '
+  say 'DDname based on day of month and seconds since midnight:'
+  ddn = 'D'left(date('e'),2)''right(time('l'),5)
+  say 'DDname:' ddn
+
+  /* ---------------------------------- *
+  | Using the OMVS /dev/urandom device |
+  * ---------------------------------- */
+  say ' '
+  say 'Random string generated from OMVS /dev/urandom device:'
+  x = bpxwunix('head -c 4 /dev/urandom',,so.,se.)
+  random = c2x(so.1)
+  say 'DDname:' left(random,7)
